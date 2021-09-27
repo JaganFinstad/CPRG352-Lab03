@@ -20,12 +20,11 @@
             <label for="Second">Second</label>
             <input name="SecondNumber" id="Second" type="text" value=${secondnumber} >
             <br>
-            <input type="submit" value="+">
-            <input type="submit" value="-">
-            <input type="submit" value="*">
-            <input type="submit" value="%">
-            <br>
-            ${message}<a href="age">Age Calculator</a>
+            <input name="arithmetic" type="submit" value="+">
+            <input name="arithmetic" type="submit" value="-">
+            <input name="arithmetic" type="submit" value="*">
+            <input name="arithmetic" type="submit" value="%" >
+            <p name="result">Result: ${dash}  <br>${message}<a href="age">Age Calculator</a></p>
         </form>
     </body>
 </html>

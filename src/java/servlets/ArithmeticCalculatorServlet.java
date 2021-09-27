@@ -23,6 +23,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("dash", "---");
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
         return;
     }
@@ -35,9 +36,57 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String secondNumber = request.getParameter("SecondNumber");
         request.setAttribute("firstnumber", firstNumber);
         request.setAttribute("secondnumber", secondNumber);
+        
+        
+        if (firstNumber == null || firstNumber.equals("") || secondNumber == null || secondNumber.equals("")) {
+            request.setAttribute("dash", "Invalid");
+        }
+        
+        else if (isEmpty(firstNumber, secondNumber)) {
+            request.setAttribute("dash", "Invalid");
+        }
+            
+        else {
+            String whatOperation = request.getParameter("arithmetic");
+            int firstnumber = Integer.parseInt(firstNumber);
+            int secondnumber = Integer.parseInt(secondNumber);
+            int answer = 0;
+            
+            switch (whatOperation) {
+                case "+": answer = firstnumber + secondnumber;
+                          request.setAttribute("dash", answer);
+                break;
+                 case "-":answer = firstnumber - secondnumber;
+                          request.setAttribute("dash", answer);
+                break;
+                 case "*": answer = firstnumber * secondnumber;
+                          request.setAttribute("dash", answer);
+                break;
+                 case "%": answer = firstnumber % secondnumber;
+                          request.setAttribute("dash", answer);
+                break;
+                
+                          
+        }
+            
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
         return;
     }
 
+    
+        public boolean isEmpty (String FirstNumber, String SecondNumber) {
+        boolean isEmpty;
+        try {
+            double isfirstNumber = Integer.parseInt(FirstNumber);
+            double isSecondNumber = Integer.parseInt(SecondNumber);
+            isEmpty = false;
+            }
+            
+            catch (NumberFormatException e) {
+                isEmpty = true;
+            }
+        return isEmpty;
+    }
 
 }
